@@ -1,4 +1,4 @@
-package org.superbiz.moviefun.albums; /**
+package org.superbiz.moviefun.albumsapi; /**
  * Licensed to the Apache Software Foundation (ASF) under one or more
  * contributor license agreements.  See the NOTICE file distributed with
  * this work for additional information regarding copyright ownership.
@@ -24,33 +24,33 @@ import javax.persistence.criteria.CriteriaQuery;
 import java.util.List;
 
 @Repository
-public class AlbumsBean {
+public class AlbumsClient {
 
     @PersistenceContext
     private EntityManager entityManager;
 
     @Transactional
-    public void addAlbum(Album album) {
+    public void addAlbum(AlbumInfo album) {
         entityManager.persist(album);
     }
 
-    public Album find(long id) {
-        return entityManager.find(Album.class, id);
+    public AlbumInfo find(long id) {
+        return entityManager.find(AlbumInfo.class, id);
     }
 
-    public List<Album> getAlbums() {
-        CriteriaQuery<Album> cq = entityManager.getCriteriaBuilder().createQuery(Album.class);
-        cq.select(cq.from(Album.class));
+    public List<AlbumInfo> getAlbums() {
+        CriteriaQuery<AlbumInfo> cq = entityManager.getCriteriaBuilder().createQuery(AlbumInfo.class);
+        cq.select(cq.from(AlbumInfo.class));
         return entityManager.createQuery(cq).getResultList();
     }
 
     @Transactional
-    public void deleteAlbum(Album album) {
+    public void deleteAlbum(AlbumInfo album) {
         entityManager.remove(album);
     }
 
     @Transactional
-    public void updateAlbum(Album album) {
+    public void updateAlbum(AlbumInfo album) {
         entityManager.merge(album);
     }
 }
